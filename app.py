@@ -15,11 +15,11 @@ class Producto(db.Model):
 
     id    = db.Column(db.Integer, primary_key=True)
     name  = db.Column(db.String, nullable=False)
-    precio = db.Column(db.Float, nullable=False)
+    price = db.Column(db.Float, nullable=False)
     stock = db.Column(db.Integer, default=0)
 
     def __repr__(self):
-        return (f"<Producto(id={self.id}, name='{self.name}', "f"precio={self.precio}, stock={self.stock})>")
+        return (f"<Producto(id={self.id}, name='{self.name}', "f"price={self.price}, stock={self.stock})>")
 
 
 #  1. CREATE – Inicializar BD e insertar datos
@@ -31,11 +31,11 @@ def init_db():
 def insert_products():
     with app.app_context():
         print("\n Insertando productos")
-        p1 = Producto(name="Laptop Dell",   precio=1200, stock=10)
-        p2 = Producto(name="Mouse", precio=80,   stock=25)
-        p3 = Producto(name="Teclado Genius",  precio=150,  stock=15)
-        p4 = Producto(name="Monitor LG",   precio=600,  stock=8)
-        p5 = Producto (name="Audífonos Sony",     precio=100,  stock=10)
+        p1 = Producto(name="Laptop Dell",   price=1200, stock=10)
+        p2 = Producto(name="Mouse", price=80,   stock=25)
+        p3 = Producto(name="Teclado Genius",  price=150,  stock=15)
+        p4 = Producto(name="Monitor LG",   price=600,  stock=8)
+        p5 = Producto (name="Audífonos Sony",     price=100,  stock=10)
 
         db.session.add_all([p1, p2, p3, p4, p5])
         db.session.commit()
@@ -51,7 +51,7 @@ def query_products():
             print(f"  {p}")
 
         print("\n Productos con precio >= 200:")
-        caros = Producto.query.filter(Producto.precio >= 200).all()
+        caros = Producto.query.filter(Producto.price >= 200).all()
         for p in caros:
             print(f"  {p}")
 
@@ -71,7 +71,7 @@ def update_product():
         if product:
             print(f"  Antes : {product}")
             product.name  = "Mouse Logitech MX Master 3"
-            product.precio = 89.99
+            product.price = 89.99
             product.stock = 30
             db.session.commit()
             # Re-query para mostrar el valor actualizado
